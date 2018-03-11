@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.acer.webview.BackCameraActivity">
+
+    <FrameLayout
+        android:id="@+id/first_frame"
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1">
+        <FrameLayout
+            android:id="@+id/mPreview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+        <FrameLayout
+            android:id="@+id/overlay_container"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:background="@drawable/transparent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <Button
+                android:id="@+id/button_snap"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
+                android:text="SNAP"
+                android:layout_gravity="right|center_vertical"
+                />
+            <com.example.acer.webview.MyView_back
+                android:id="@+id/show_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/overlay"
+                />
+            <TextView
+                android:id="@+id/text_valueOfG"
+                android:textSize="20dp"
+                android:textColor="@color/yellow"
+                android:text="ACC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                />
+        </FrameLayout>
+    </FrameLayout>
+</LinearLayout>
