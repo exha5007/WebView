@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import static com.example.acer.webview.MainActivity.currentFileName;
 import static java.security.AccessController.getContext;
 
 public class BackCameraActivity extends Activity implements SensorEventListener {
@@ -256,8 +257,10 @@ public class BackCameraActivity extends Activity implements SensorEventListener 
 
     public void ResultActivity(byte[] data) {
         try {
-            outStream = new FileOutputStream(String.format("/sdcard/%d.jpg",
-                    System.currentTimeMillis()) );
+            String currentTime = String.format("/sdcard/%d.jpg",
+                    System.currentTimeMillis());
+            outStream = new FileOutputStream(currentTime);
+            currentFileName = currentTime;
             outStream.write(data);
             outStream.close();
         } catch (IOException e) {

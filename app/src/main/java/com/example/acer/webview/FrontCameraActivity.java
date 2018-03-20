@@ -31,6 +31,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.acer.webview.MainActivity.currentFileName;
 import static java.security.AccessController.getContext;
 
 public class FrontCameraActivity extends Activity implements SensorEventListener,KeyEvent.Callback {
@@ -172,14 +173,6 @@ public class FrontCameraActivity extends Activity implements SensorEventListener
         }
         return a;
     }
-    public float[] generateArray1(int pixel) {
-        float[] a = new float[180];
-        a[0] = 0;
-        for(int i=1;i<=179;i++) {
-            a[i] = (pixel/179f)*i;
-        }
-        return a;
-    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -246,8 +239,10 @@ public class FrontCameraActivity extends Activity implements SensorEventListener
 
     public void ResultActivity(byte[] data) {
         try {
-            outStream = new FileOutputStream(String.format("/sdcard/%d.jpg",
-                    System.currentTimeMillis()) );
+            String currentTime = String.format("/sdcard/%d.jpg",
+                    System.currentTimeMillis());
+            outStream = new FileOutputStream(currentTime);
+            currentFileName = currentTime;
             outStream.write(data);
             outStream.close();
         } catch (IOException e) {
@@ -257,6 +252,7 @@ public class FrontCameraActivity extends Activity implements SensorEventListener
         mainbitmap = decodeSampledBitmapFromResource(data, 200, 200);
         mainbitmap=RotateBitmap(mainbitmap,270);
         mainbitmap=flip(mainbitmap);
+
     }
 
     public static Bitmap decodeSampledBitmapFromResource(byte[] data,

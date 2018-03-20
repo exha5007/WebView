@@ -19,7 +19,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.opencv.android.OpenCVLoader;
+
 public class MainActivity extends ActionBarActivity {
+    static Bitmap bitmapFrontCam;
+    static String currentFileName;
     ImageView iv;
     //to call our own custom cam
     private final String PERMISSION_WRITE_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE";
@@ -27,6 +31,9 @@ public class MainActivity extends ActionBarActivity {
     private final static int CAMERA_PIC_REQUEST1 = 0;
     Context con;
     Button btn_back;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,21 +110,21 @@ public class MainActivity extends ActionBarActivity {
         return -1; // No front-facing camera found
     }
 
-    Bitmap bitmapFrontCam;
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_PIC_REQUEST1) {
             if (resultCode == RESULT_OK) {
                 try {
-                    bitmapFrontCam = (Bitmap) data
+                    bitmapFrontCam = data
                             .getParcelableExtra("BitmapImage");
-
-
 
                 } catch (Exception e) {
                 }
                 iv.setImageBitmap(bitmapFrontCam);
+                Intent intent = new Intent(this,ImageProcess.class);
+                startActivity(intent);
             }
 
         } else if (resultCode == RESULT_CANCELED) {
